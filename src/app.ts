@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import { ServerApp } from './presentation/server';
 import { envs } from './config/plugins/env.plugin';
 

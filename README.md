@@ -9,6 +9,7 @@ create a series of tasks using Clean Code principles and TDD (Test-Driven Develo
 
 ```
 PORT=3000
+MAILER_SERVICE=gmail
 MAILER_EMAIL=your-email@example.com
 MAILER_SECRET_KEY=your-secret-key
 PROD=false
