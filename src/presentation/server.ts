@@ -1,9 +1,10 @@
 import { envs } from '../config/plugins/env.plugin';
 import { CheckService } from '../domain/use-cases/checks/check-service';
+import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs';
 import { FileSystemDataSource } from '../infrastructure/datasources/file-system.datasource';
 import { LogRepositoryImplementation } from '../infrastructure/repositories/log.repository.implementation';
 import { CronService } from './cron/cron-service';
-import { EmailService, SendMailOptions } from './email/email.plugin';
+import { EmailService, SendMailOptions } from './email/email.service';
 
 const fileSystemLogRepository = new LogRepositoryImplementation(
   new FileSystemDataSource(),
@@ -14,13 +15,16 @@ export class ServerApp {
     console.log('Server started...');
     console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
     const emailService = new EmailService();
-    emailService.sendEmail({
-      to: 'superferdisabled@gmail.com',
-      subject: 'Hello',
-      htmlBody: `<h1>Hello</h1>
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr</p>
-      `} as SendMailOptions);
+    new SendEmailLogs(emailService, fileSystemLogRepository).execute('superferenabled@gmail.com');
+    // emailService.sendEmail({
+    //   to: 'superferdisabled@gmail.com',
+    //   subject: 'Hello',
+    //   htmlBody: `<h1>Hello</h1>
+
+    //   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr</p>
+    //   `} as SendMailOptions);
+
+    // emailService.sendEmailWithSystemLogs('superferenabled@gmail.com');
 
     // const job5 = CronService.createJob('*/5 * * * * *', () => {
     //   new CheckService(
