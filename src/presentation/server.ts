@@ -12,10 +12,13 @@ const fileSystemLogRepository = new LogRepositoryImplementation(
 
 export class ServerApp {
   public static start() {
-    console.log('Server started...');
-    console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
-    const emailService = new EmailService();
-    new SendEmailLogs(emailService, fileSystemLogRepository).execute('superferenabled@gmail.com');
+
+    // console.log('Server started...');
+    // console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
+    // const emailService = new EmailService();
+    // new SendEmailLogs(emailService, fileSystemLogRepository).execute('superferenabled@gmail.com');
+
+
     // emailService.sendEmail({
     //   to: 'superferdisabled@gmail.com',
     //   subject: 'Hello',

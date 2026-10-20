@@ -33,6 +33,7 @@
     "dotenv": "^18.0.5",
     "env-var": "^7.5.0",
     "json-server": "^1.0.0-beta.15",
+    "mongoose": "^9.11.2",
     "nodemailer": "^10.0.16",
     "yargs": "^18.1.0"
   }
