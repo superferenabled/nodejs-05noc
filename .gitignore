@@ -3,6 +3,7 @@
 /coverage/
 /out/
 /logs/
+/mongo/
 
 *.log
 .env
