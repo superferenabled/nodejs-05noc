@@ -29,13 +29,13 @@ export class ServerApp {
 
     // emailService.sendEmailWithSystemLogs('superferenabled@gmail.com');
 
-    // const job5 = CronService.createJob('*/5 * * * * *', () => {
-    //   new CheckService(
-    //     fileSystemLogRepository,
-    //     () => console.log('success'),
-    //     (error) => console.log(error),
-    //     // ).execute('http://localhost:3000');
-    //   ).execute('https://www.google.com');
-    // });
+    const job5 = CronService.createJob('*/5 * * * * *', () => {
+      new CheckService(
+        fileSystemLogRepository,
+        () => console.log('success'),
+        (error) => console.log(error),
+        // ).execute('http://localhost:3000');
+      ).execute('https://www.google.com');
+    });
   }
 }

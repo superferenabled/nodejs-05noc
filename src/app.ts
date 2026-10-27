@@ -9,7 +9,7 @@ const main = async () => {
     dbName: envs.MONGO_DB_NAME,
   });
 
-  // ServerApp.start();
+  ServerApp.start();
 };
 
 (async () => {
