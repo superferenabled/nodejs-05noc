@@ -1,17 +1,19 @@
 import { envs } from '../config/plugins/env.plugin';
+import { LogSeverityLevel } from '../domain/entities/log.entity';
 import { CheckService } from '../domain/use-cases/checks/check-service';
 import { SendEmailLogs } from '../domain/use-cases/email/send-email-logs';
 import { FileSystemDataSource } from '../infrastructure/datasources/file-system.datasource';
+import { MongoLogDataSource } from '../infrastructure/datasources/mongo-log.datasource';
 import { LogRepositoryImplementation } from '../infrastructure/repositories/log.repository.implementation';
 import { CronService } from './cron/cron-service';
 import { EmailService, SendMailOptions } from './email/email.service';
 
-const fileSystemLogRepository = new LogRepositoryImplementation(
-  new FileSystemDataSource(),
+const logRepository = new LogRepositoryImplementation(
+  new MongoLogDataSource(),
 );
 
 export class ServerApp {
-  public static start() {
+  public static async start() {
 
     // console.log('Server started...');
     // console.log(envs.MAILER_EMAIL, envs.MAILER_SECRET_KEY);
@@ -29,13 +31,16 @@ export class ServerApp {
 
     // emailService.sendEmailWithSystemLogs('superferenabled@gmail.com');
 
-    const job5 = CronService.createJob('*/5 * * * * *', () => {
-      new CheckService(
-        fileSystemLogRepository,
-        () => console.log('success'),
-        (error) => console.log(error),
-        // ).execute('http://localhost:3000');
-      ).execute('https://www.google.com');
-    });
+    const logs = await logRepository.getLogs(LogSeverityLevel.medium);
+    console.log(logs);
+
+    // const job5 = CronService.createJob('*/5 * * * * *', () => {
+    //   new CheckService(
+    //     logRepository,
+    //     () => console.log('success'),
+    //     (error) => console.log(error),
+    //     // ).execute('http://localhost:3000');
+    //   ).execute('https://www.google.com');
+    // });
   }
 }
