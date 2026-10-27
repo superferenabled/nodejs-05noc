@@ -9,21 +9,7 @@ const main = async () => {
     dbName: envs.MONGO_DB_NAME,
   });
 
-  // Create a collection = tables, document = register
-  const newLog = await LogModel.create({
-    message: 'Test message from mongo',
-    level: 'low',
-    origin: 'App.ts',
-  });
-
-  await newLog.save();
-  console.log(newLog);
-
-  const logs = await LogModel.find();
-  console.log(logs);
-
-  ServerApp.start();
-  console.log(envs.MAILER_EMAIL);
+  // ServerApp.start();
 };
 
 (async () => {
