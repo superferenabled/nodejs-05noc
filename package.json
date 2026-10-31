@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest --run",
-    "test:coverage": "vitest --coverage",
-    "test:watch": "vitest",
+    "docker:test": "docker compose -f docker-compose.test.yml --env-file .env.test up -d",
+    "test": "npm run docker:test && vitest --run",
+    "test:coverage": "npm run docker:test && vitest --coverage",
+    "test:watch": "npm run docker:test && vitest",
     "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
     "start": "npm run build && npx tsc-esm-fix --target='dist' && node dist/app.js",

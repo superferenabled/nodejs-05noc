@@ -9,6 +9,7 @@ export default defineConfig(
       environment: 'node',
       clearMocks: true,
       globals: true,
+      setupFiles: ['./vitest.setup.ts'],
       env: {
         ...config({ path: '.env.test' }).parsed,
       },
